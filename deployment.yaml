@@ -17,8 +17,8 @@ spec:
           image: octovianus/hms-s3-front:26
           ports:
             - containerPort: 5173 # The port your Node.js app listens on
-      imagePullSecrets:
-        - name: my-dockerhub-secret
+      # imagePullSecrets:
+      #   - name: my-dockerhub-secret
 
 ---
 
