@@ -21,11 +21,11 @@ node {
                 sh "git config --global user.email developerteamhelios@gmail.com"
                 
                 sh "cat deployment.yaml"
-                sh "sed -i 's+octovianus/hms-s3-front.*+octovianus/hms-s3-front:${DOCKERTAG}+g' deployment.yaml"
+                sh "sed -i 's+octovianus/hms-s3-front.*+octovianus/hms-s3-front:${params.DOCKERTAG}+g' deployment.yaml"
                 
                 sh "cat deployment.yaml"
                 sh "git add ."
-                sh "git commit -m 'Done by Jenkins job update-deployment: ${BUILD_NUMBER}'"
+                sh "git commit -m 'Done by Jenkins job update-deployment: ${params.DOCKERTAG}'"
                 
                 // sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:main"
                 // https://github.com/hheelliiooss-admin/hms-s3-front-manifest.git
