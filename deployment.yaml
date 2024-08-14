@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s3-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: s3-frontend
+  template:
+    metadata:
+      labels:
+        app: s3-frontend
+    spec:
+      containers:
+        - name: s3-frontend
+          image: octovianus/hms-s3-front:latest
+          ports:
+            - containerPort: 5173 # The port your Node.js app listens on
+      imagePullSecrets:
+        - name: my-dockerhub-secret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: s3-frontend-service
+spec:
+  selector:
+    app: s3-frontend
+  ports:
+    - protocol: TCP
+      port: 80            # Port that the service will listen on within the cluster # The port on which the Service will be exposed
+      targetPort: 5173    # Port on the pods that the service will forward traffic to # The port on the Pod that the Service should forward traffic to
+      nodePort: 30081     # The port on the node (VM) on which the Service can be accessed externally
+  type: NodePort
