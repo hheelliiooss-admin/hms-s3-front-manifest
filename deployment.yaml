@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: s3-frontend
-          image: octovianus/hms-s3-front:latest
+          image: octovianus/hms-s3-front:25
           ports:
             - containerPort: 5173 # The port your Node.js app listens on
       imagePullSecrets:
