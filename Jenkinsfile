@@ -14,7 +14,7 @@ node {
     }
     
     stage('Update Git') {
-        steps {
+        // steps {
             echo "Received parameter: ${params.DOCKERTAG}"
             withCredentials([gitUsernamePassword(credentialsId: 'helios-jenkins-new', gitToolName: 'Default')]) {
                 sh "git config --global user.name hheelliiooss-admin"
@@ -26,14 +26,11 @@ node {
                 sh "cat deployment.yaml"
                 sh "git add ."
                 sh "git commit -m 'Done by Jenkins job update-deployment: ${params.DOCKERTAG}'"
-                
-                // sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:main"
-                // https://github.com/hheelliiooss-admin/hms-s3-front-manifest.git
                 sh "git push https://github.com/hheelliiooss-admin/hms-s3-front-manifest.git HEAD:main"
                 
             }
             
-        }
+        // }
         
     }
 }
